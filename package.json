@@ -4,6 +4,7 @@
   "description": "udemy course on the MEAN Stack",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/mrizzini/meanHotel/issues"
   },
-  "homepage": "https://github.com/mrizzini/meanHotel#readme"
+  "homepage": "https://github.com/mrizzini/meanHotel#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  },
+  "devDependencies": {
+    "mocha": "^5.0.0"
+  }
 }
