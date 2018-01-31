@@ -1,0 +1,19 @@
+{
+  "name": "udemymeanhotel",
+  "version": "1.0.0",
+  "description": "udemy course on the MEAN Stack",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrizzini/meanHotel.git"
+  },
+  "author": "Matt Rizzini",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mrizzini/meanHotel/issues"
+  },
+  "homepage": "https://github.com/mrizzini/meanHotel#readme"
+}
