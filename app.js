@@ -17,6 +17,7 @@ goodbye(); // calls the function
 var express = require('express'); // requires express
 var app = express(); // initializes it, so we can use it in our app
 var path = require('path');
+var bodyParser = require('body-parser'); // middleware. parses incoming request bodies in a middleware before your handlers, available under the req.body property.
 
 var routes = require('./api/routes');
 
@@ -37,6 +38,8 @@ app.use(express.static(path.join(__dirname, 'public'))); // when express receive
 //         .status(200)
 //         .sendFile(path.join(__dirname, 'public', 'index.html'));
 // });
+
+app.use(bodyParser.urlencoded({ extended : false })); // extended to false means we only need string and arrays from our form body
 
 app.use('/api', routes); // the / means express will look inside routes file for any route starting with /api
 

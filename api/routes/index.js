@@ -11,8 +11,8 @@ router
     .route('/hotels/:hotelId') // hotelId is a parameter which will match any thing from /api/hotels/....  the controller can also access this
     .get(ctrlHotels.hotelsGetOne);
 
-
-
-
+router
+    .route('/hotels/new') 
+    .post(ctrlHotels.hotelsAddOne);
 
 module.exports = router; //exports router to other files
