@@ -14,7 +14,8 @@ goodbye(); // calls the function
 
 
 // express is the web application framework. listens for incoming requests and responds. it can serve static files, compile and deliver HTML, return json data
-require('./api/data/dbconnection.js').open();
+// require('./api/data/dbconnection.js'); // requires dbconnection.js file and calls open to open the database connection. not needed anymore with mongoose
+require('./api/data/db.js');
 var express = require('express'); // requires express
 var app = express(); // initializes it, so we can use it in our app
 var path = require('path');
