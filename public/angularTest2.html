@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Angular Controllers</title>
+    <script>
+        angular.module('myApp', [])
+        .controller('MyController', MyController)
+        .controller('MySecondController', MySecondController)
+        .controller('MyThirdController', MyThirdController);
+        
+        function MyController($scope) {
+            // $scope.name = 'Tamas';
+            $scope.number = 0;
+            $scope.increment = function(amount) {
+                $scope.number = $scope.number + amount;
+            }
+            
+            $scope.decrement = function() {
+                $scope.number = $scope.number - 1;
+            };
+        }
+        
+        function MySecondController() {
+            var vm = this; // assigns view model var to this
+            vm.name = 'Tamas';
+        }
+        
+        function MyThirdController() {
+            var vm = this;
+            this.name = 'Simon';
+        }
+        
+    </script>
+</head>
+<body>
+    
+    <div ng-controller="MyController">
+        <p>Hello, {{ name }}</p>
+    </div>
+    
+      <div ng-controller="MyController">
+        {{ number }}
+        <p>
+            <button ng-click="increment(5)">+5</button>
+            <button ng-click="decrement()">-1</button>
+        </p>
+    </div>
+    
+    <div ng-controller="MySecondController as MySecondCtrl">
+        <div ng-controller="MyThirdController as MyThirdCtrl">
+            <!--This Controller as MyCtrl is the recommended way-->
+        <p>{{ MySecondCtrl.name }} is the Second Controller</p>
+        <p>{{ MyThirdCtrl.name }} is the Third Controller</p>
+        </div> 
+    </div>
+    
+</body>
+</html>

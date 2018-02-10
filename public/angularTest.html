@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" ng-app>
+    <!--this directive needs to be added at the top. starts the app. must be initialized at the highest level to work for entite app -->
+    <!--this defines the scope of the angular app-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Section 4 Beginning Lessons</title>
+    <style>
+        .red {
+            border-color: red;
+            color: red;
+        }
+        .green {
+            border-color: green;
+            color: green;
+        }
+        .ng-cloak, [ng-cloak], [ng\:cloak] {  
+            display: none !important;
+        }
+        /*use this to no longer see {{ }} when page is loading. add to body tag*/
+    </style>
+</head>
+<body ng-cloak>
+ <h3> 1 + 2 = {{1 + 2}}  {{'HELLO ' + ' ' + 'World!'}} </h3>
+  <!--{{ }} are expressions. can be any javascript expressions. concat, evaluating variables, operations-->
+  <!--anything in the double curly brackets will be evaluated by Angular-->
+  <!--will not log out property that does not exist. it will silently fail-->
+  
+  <p> Hello, {{ user }} </p>
+  <input type="text" name"" id="" ng-model="user">
+  <!--this is data binding. the model USER binds to the USER in the p tag.-->
+  <!--can access the values of the model by binding it to an expression (like the p tag above)-->
+  <!--two way data binding between view and model.-->
+   
+  <!--directives tell angular to attach a behavior to the element itself-->
+  
+  <div ng-init="name = 'Tamas'">
+      {{name}} <!-- can bind it with name this way -->
+    <p ng-bind="name"></p> <!-- or bind it this way -->
+  </div>
+  
+  <div ng-init="number = 0">
+    <button ng-click="number = number + 1">+1</button><!-- ng-click directive can be used on hTML elements to execute a method  -->
+    <button ng-click="number = number - 1">-1</button><!-- or can be passed an expression that will manipulate element inside the containing scope  -->
+    <p> {{ number }}</p>
+  </div>
+  
+  <div>Show me the paragraph <input type="checkbox" ng-model="isChecked"> <!-- ng-model on a checkbox has 2 values - T/F  -->
+  <p ng-if="isChecked">Secret message</p> <!-- ng-if is a directive. if isChecked is true, show the p tag -->
+  <p ng-show="isChecked"> Secret message #2</p> <!-- ng-show is a directive that shows the element if isChecked is true -->
+  </div> <!-- difference is ng-if removes element from the DOM tree. ng-show applies CSS display properties to hide -->
+  <!-- ng-if will NOT keep styling. ng-show WILL keep styling -->
+  <br>
+  <div ng-init="number = 19">
+      <input type="text" ng-model="guess" ng-class="{red: guess != number, green: guess == number}">
+      <!-- above line: ng-class allows us to modify css class dynamically based on conditions -->
+      <!-- apply css class red when guess does not equal number. apply css class green when guess equals number -->
+      <!--<p ng-hide="guess != number">Correct</p> <!-- hides P if guess does not equal 19 -->
+      <!--<p ng-show="guess != number">Incorrect</p> <!-- shows P if guess does not equal 19 -->
+  </div>
+  
+  <div ng-init="numbers = [0, 1, 2, 3, 4, 5, 6, 7]"> <!-- creates var numbers -->
+      <ul>
+          <li ng-repeat="number in numbers" ng-class="{red: $even, green: $odd}">{{ number }}</li> 
+          <!-- displays all numbers. creates var of number. prints out each number in element -->
+          <!-- displays the numbers in red if they are odd. green if they are even -->
+      </ul>
+  </div>
+  
+  <div ng-init="names = ['Smith', 'Smith']">
+      <ul>
+          <li ng-repeat="name in names track by $index">{{name}}</li>
+          <!-- this tells ng-repeat to track iteration by index, NOT values -->
+      </ul>
+  </div>
+  
+    <div ng-init="fullNames = [{surname: 'Smith', firstname: 'John'},
+    {surname: 'Smith', firstname: 'Sue'}]">
+      <ul>
+          <li ng-repeat="fullName in fullNames">{{fullName.surname}}, {{fullName.firstname}}</li>
+          <!-- iterating thru an object -->
+      </ul>
+  </div>
+  
+  <div ng-init= "rebels = [
+  { name: 'Luke Skywalker', profession: 'Jedi', weapon: 'lightsaber', age: 19 },
+  { name: 'Ben Kenobi', profession: 'Jedi', weapon: 'lightsaber', age: 56 },
+  { name: 'Han Solo', profession: 'Smuggler', weapon: 'laser blaster', age: 32 },
+  { name: 'Chewbacca', profession: 'Pilot', weapon: 'bowcaster', age: 200 },
+  ];">
+      <!-- if you want to populate an options tag, use ng-options -->
+      <!-- this will get the name of each rebel and put it as option -->
+      <select name="" id="" ng-model="rebel" ng-options="rebel.name group by rebel.weapon for rebel in rebels"></select>
+      <!-- need to have ng-model  group by sorts by weapon, creates new opt dom elements created-->
+      <p>You have selected: {{rebel.name}} ({{rebel.profession}})</p>
+  </div>
+  
+    <div ng-init= "rebels = [
+  { name: 'Luke Skywalker', profession: 'Jedi', weapon: 'lightsaber', age: 19 },
+  { name: 'Ben Kenobi', profession: 'Jedi', weapon: 'lightsaber', age: 56 },
+  { name: 'Han Solo', profession: 'Smuggler', weapon: 'laser blaster', age: 32 },
+  { name: 'Chewbacca', profession: 'Pilot', weapon: 'bowcaster', age: 200 },
+  ];">
+        <ul>
+           <li ng-repeat="rebel in rebels">{{ rebel.name }}</li> 
+        </ul>
+  </div>
+  
+  <!--filters can format data and expressions. use | -->
+  <div ng-init="amount = 1250.50">
+    <p>{{ amount | currency }}</p> <!-- turns into currency -->
+    <p>{{ amount | number: 1 }}</p> <!-- turns into one decimal -->
+    <p>{{ -amount | number: 1 }}</p> <!-- turns into negative number -->
+  </div>
+  
+  <div ng-init="string = 'star wars'">
+      <p>{{ string | uppercase }}</p> <!-- turns string into uppercase -->
+  </div>
+  
+  <div ng-init="myDate= '1399648945000'">
+    <p>{{ myDate | date: 'medium'  }}</p> <!-- turns into a date -->
+    <p>{{ myDate | date: 'MMMM d, yyyy (H:m)' }}</p> <!-- turns into a date -->
+  </div>
+  
+  <div ng-init="myArray = [0, 1, 2, 3, 4, 5]">
+      <p>{{ myArray | limitTo: 4 }}</p> <!-- limits to just the first 4 -->
+      <p>{{ myArray | limitTo: -2 }}</p> <!-- limits to just the last 2 -->
+  </div>
+  
+  <div ng-init= "rebels = [
+  { name: 'Luke Skywalker', profession: 'Jedi', weapon: 'lightsaber', age: 19 },
+  { name: 'Ben Kenobi', profession: 'Jedi', weapon: 'lightsaber', age: 56 },
+  { name: 'Han Solo', profession: 'Smuggler', weapon: 'laser blaster', age: 32 },
+  { name: 'Chewbacca', profession: 'Pilot', weapon: 'bowcaster', age: 200 },
+  ];">
+        <ul>
+           <li ng-repeat="rebel in rebels | orderBy: 'name'">{{ rebel.name }} (age: {{ rebel.age }}) is a  {{ rebel.profession }}
+           fighting with a {{ rebel.weapon }}</li> <!-- this orders by name --> 
+        </ul>
+        <ul>
+           <li ng-repeat="rebel in rebels | orderBy: ['profession', '-age-]">{{ rebel.name }} (age: {{ rebel.age }}) is a  {{ rebel.profession }}
+           fighting with a {{ rebel.weapon }}</li> <!-- this orders profession, and if there is duplicates, orders by age --> 
+        </ul>
+  </div>
+  
+    <div ng-init= "rebels = [
+  { name: 'Luke Skywalker', profession: 'Jedi', weapon: 'lightsaber', age: 19 },
+  { name: 'Ben Kenobi', profession: 'Jedi', weapon: 'lightsaber', age: 56 },
+  { name: 'Han Solo', profession: 'Smuggler', weapon: 'laser blaster', age: 32 },
+  { name: 'Chewbacca', profession: 'Pilot', weapon: 'bowcaster', age: 200 },
+  ];">
+        <p> Weapon filter: <input type="text" ng-model="search.weapon"> </p> <!-- search by weapon -->
+        <p> Free text search: <input type="text" ng-model="search.$"> </p> <!-- search by anything -->
+
+        <ul>
+           <li ng-repeat="rebel in rebels | filter: search">{{ rebel.name }} (age: {{ rebel.age }}) is a  {{ rebel.profession }}
+           fighting with a {{ rebel.weapon }}</li> <!-- this filters by input text--> 
+        </ul>
+        <ul>
+    </div>
+  
+  <!-- controllers are javascript functions that take one parameter ($) and we can attach properties to the $-->
+  <!-- think of $scope as the glue between controller and the view. the properties will be accessible to the view-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.7/angular.min.js"></script>
+</body>
+</html>
