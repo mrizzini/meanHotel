@@ -1,0 +1,7 @@
+<h1>Hello, {{vm.name  }}</h1>
+<!--don't need to use ng-controller since in route definition we are telling code that main.html will use MyController-->
+
+<ul>
+    <li ng-repeat="film in vm.films"> {{ film.title }}</li> <!-- iterates thru vm.film set up in MainController and prints title -->
+    
+</ul>
