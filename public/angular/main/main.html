@@ -1,6 +1,16 @@
 <h1>Hello, {{vm.name  }}</h1>
 <!--don't need to use ng-controller since in route definition we are telling code that main.html will use MyController-->
 
+<h2>Hello, {{ vm.name | reverse }}!</h2>
+<!--this calls the reverse function, our custom filter which reverses a string-->
+
+<p>{{ vm.date1 | dateSuffix }}</p>
+<p>{{ vm.date2 | dateSuffix }}</p>
+<p>{{ vm.date3 | dateSuffix }}</p>
+<p>{{ vm.date4 | dateSuffix }}</p>
+<!--you can add arguments to custom filters. need to add here and in the custom filter file-->
+
+
 <ul>
     <li ng-repeat="film in vm.films"> {{ film.title }}</li> <!-- iterates thru vm.film set up in MainController and prints title -->
     

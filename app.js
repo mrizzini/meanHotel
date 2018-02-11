@@ -23,7 +23,7 @@ var bodyParser = require('body-parser'); // middleware. parses incoming request 
 
 var routes = require('./api/routes');
 
-app.set('port', process.env.PORT);
+app.set('port', process.env.PORT); // defines the port to run on
 
 app.use(function(req, res, next) { // this is middleware. these run sequentially
     console.log(req.method, req.url); // will log what method is (post, get), and what the requested url is
@@ -31,8 +31,9 @@ app.use(function(req, res, next) { // this is middleware. these run sequentially
 });
 
 app.use(express.static(path.join(__dirname, 'public'))); // when express receives request for root, it checks if root is matched in any files in public folder.
-//if so it will deliver that ifle direclty to browswer without need to add any extra routes
+//if so it will deliver that file direclty to browswer without need to add any extra routes
 // app.use = middleware. any request that comes in will run through the functionality and run until it hits a route or something returns a response
+// sets static directory before defining routes
 
 // app.get('/', function(req, res) {
 //     console.log('GET the homepage');
@@ -42,6 +43,8 @@ app.use(express.static(path.join(__dirname, 'public'))); // when express receive
 // });
 
 app.use(bodyParser.urlencoded({ extended : false })); // extended to false means we only need string and arrays from our form body
+// enables parsing of posted forms
+
 
 app.use('/api', routes); // the / means express will look inside routes file for any route starting with /api
 
