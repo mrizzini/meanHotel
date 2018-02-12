@@ -34,6 +34,7 @@ app.use(express.static(path.join(__dirname, 'public'))); // when express receive
 //if so it will deliver that file direclty to browswer without need to add any extra routes
 // app.use = middleware. any request that comes in will run through the functionality and run until it hits a route or something returns a response
 // sets static directory before defining routes
+app.use('/node_modules', express.static(__dirname + '/node_modules'));
 
 // app.get('/', function(req, res) {
 //     console.log('GET the homepage');

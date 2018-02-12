@@ -1,0 +1,10 @@
+<!--this is the template that loads when someone hits the route of our application-->
+
+<h1> {{ vm.title }} </h1>
+
+<ul>
+    <li ng-repeat="hotel in vm.hotels"><a ng-href="#!/hotel/{{ hotel._id }}">{{ hotel.name }}</a></li>
+    <!--the ng-href makes each hotel a link. uses _id from the data-->
+    <!--this iterates thru the first 5 hotels and prints their name on a list on the browser-->
+</ul>
+
