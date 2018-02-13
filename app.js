@@ -45,7 +45,7 @@ app.use('/node_modules', express.static(__dirname + '/node_modules'));
 
 app.use(bodyParser.urlencoded({ extended : false })); // extended to false means we only need string and arrays from our form body
 // enables parsing of posted forms
-
+app.use(bodyParser.json()); // tells backend it should natively understand json
 
 app.use('/api', routes); // the / means express will look inside routes file for any route starting with /api
 
