@@ -43,3 +43,5 @@ process.once('SIGUSR2', function(){ // this listens for the SIGUSR event, happen
 // BRING IN SCHEMAS AND MODELS
 
 require('./hotels.model.js');
+require('./users.model.js');
+// after this, we need to write our controller code. create controller files

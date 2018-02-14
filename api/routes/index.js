@@ -3,10 +3,13 @@ var router = express.Router();
 
 var ctrlHotels = require('../controllers/hotels.controllers.js'); // requires controllers file so it has access to functions in that file. 
 var ctrlReviews = require('../controllers/reviews.controllers.js'); // requires controllers file so it has access to functions in that file
+var ctrlUsers = require('../controllers/users.controllers.js'); // requires controllers file so it has access to functions in that file
 
+// Hotel routes 
 router
     .route('/hotels')
-    .get(ctrlHotels.hotelsGetAll) // this maps the controller to the route
+    // .get(ctrlHotels.hotelsGetAll) // this maps the controller to the route
+    .get(ctrlUsers.authenticate, ctrlHotels.hotelsGetAll) // ctrlUsers is the middleware. if it runs okay, then ctrlHotels runs
     .post(ctrlHotels.hotelsAddOne); // post route to add document, a new hotel
 
 router
@@ -20,7 +23,7 @@ router
 //     .route('/hotels/new') 
 //     .post(ctrlHotels.hotelsAddOne);
     
-//review routes
+// Review routes
 router
     .route('/hotels/:hotelId/reviews')
     .get(ctrlReviews.reviewsGetAll) // this maps the controller to the route
@@ -32,6 +35,15 @@ router
     .put(ctrlReviews.reviewsUpdateOne) // route to update a specific hotel review
     .delete(ctrlReviews.reviewsDeleteOne) // deletes specific hotel review
     
+// Authentication route. also need to bring in controller above
+router
+    .route('/users/register')
+    .post(ctrlUsers.register)
+    
+    router
+    .route('/users/login')
+    .post(ctrlUsers.login);
+
 
 module.exports = router; //exports router to other files
 

@@ -65,6 +65,10 @@ module.exports.hotelsGetAll = function (req, res) {
   // var db = dbconn.get(); // saves returned connection object from dbconnection.js as var. connects to the database
   // var collection = db.collection('hotels'); // use the database collection & work with collection hotels
 
+  console.log('Requested by: ' + req.user); //access user property
+  console.log('GET the hotels');
+  console.log(req.query);
+
   var offset = 0;
   var count = 5;
   var maxCount= 10;
@@ -130,9 +134,6 @@ module.exports.hotelsGetAll = function (req, res) {
   // }); 
   
   // console.log("db", db);
-  
-  // console.log('GET the hotels');
-  // console.log(req.query);
 
   // var returnData = hotelData.slice(offset, offset+count); // this takes the hotelData array and slicing it and puts it into a new var
 

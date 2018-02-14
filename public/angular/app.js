@@ -33,7 +33,11 @@ function config($routeProvider) {
        templateUrl: 'angular/hotel-display/hotel.html',
        controller: HotelController,
        controllerAs: 'vm'
+    })
+    .when('/register', { // sets up routes for register page
+        templateUrl: 'angular/register/register.html',
+        controller: RegisterController,
+        controllerAs: 'vm'
     });
-    
 }
 
