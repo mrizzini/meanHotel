@@ -4,7 +4,8 @@ angular.module('meanhotel').controller('HotelController', HotelController);
 
 
 // function HotelController($http, $routeParams) { // routeParams so we can access the ID
-    function HotelController($route, $routeParams, hotelDataFactory) { // routeParams so we can access the ID
+    function HotelController($route, $routeParams, $window, hotelDataFactory, AuthFactory, jwtHelper) { // routeParams so we can access the ID
+    // jwthelper will help with name in addReview 
     var vm = this;
     var id = $routeParams.id; // stores id
     // $http.get('/api/hotels/' + id).then(function(response) {
@@ -18,9 +19,27 @@ angular.module('meanhotel').controller('HotelController', HotelController);
         return new Array(stars);
     }
     
+    // function to determine if someone is authorized and authenticated
+    // need to add AuthFactory to controller. returns false if not logged in. true if logged in.
+    // function will be the same as in our login-controller
+    // need to fix on the back end as well on index.js
+    vm.isLoggedIn = function() {
+        if (AuthFactory.isLoggedIn) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+    
+    
     vm.addReview = function() { // function is called when you submit review
+    
+        var token = jwtHelper.decodeToken($window.sessionStorage.token); // extracts token
+        var username = token.username; // extracts username
+    
         var postData = { // creates a postData variable where u collect all data from the form
-            name: vm.name,
+            // name: vm.name,
+            name: username, // use this instead of vm.name to have form not need name
             rating: vm.rating,
             review: vm.review
         };

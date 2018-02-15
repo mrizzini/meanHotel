@@ -8,6 +8,9 @@ body {
 .padded {
     padding-top: 30px;
 }
+body > .container {
+    padding: 60px;
+}
 .footer {
     position: absolute;
     bottom: 0;

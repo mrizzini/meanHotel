@@ -8,8 +8,8 @@ var ctrlUsers = require('../controllers/users.controllers.js'); // requires cont
 // Hotel routes 
 router
     .route('/hotels')
-    // .get(ctrlHotels.hotelsGetAll) // this maps the controller to the route
-    .get(ctrlUsers.authenticate, ctrlHotels.hotelsGetAll) // ctrlUsers is the middleware. if it runs okay, then ctrlHotels runs
+    .get(ctrlHotels.hotelsGetAll) // this maps the controller to the route
+    // .get(ctrlUsers.authenticate, ctrlHotels.hotelsGetAll) // ctrlUsers is the middleware. if it runs okay, then ctrlHotels runs
     .post(ctrlHotels.hotelsAddOne); // post route to add document, a new hotel
 
 router
@@ -27,7 +27,10 @@ router
 router
     .route('/hotels/:hotelId/reviews')
     .get(ctrlReviews.reviewsGetAll) // this maps the controller to the route
-    .post(ctrlReviews.reviewsAddOne); // post route to add review, a sub-document
+    // .post(ctrlReviews.reviewsAddOne); // post route to add review, a sub-document
+    .post(ctrlUsers.authenticate, ctrlReviews.reviewsAddOne); // post route to add review, a sub-document
+    // ctrlUsers checks for valid token. middleware. if so, it will post review.
+
 
 router
     .route('/hotels/:hotelId/reviews/:reviewId') // hotelId is a parameter which will match any thing from /api/hotels/....  the controller can also access this
