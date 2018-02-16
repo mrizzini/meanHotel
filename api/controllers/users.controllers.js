@@ -40,7 +40,8 @@ module.exports.login = function(req, res) { // login function we will use as an 
     User.findOne({ // use this method to find username. in the model we set username to be unique
        username: username 
     }).exec(function(err, user) {
-        if (err) {
+        // if (err) {
+       if (!user || !password) {
             console.log(err);
             res.status(400).json(err);
         }  else {
