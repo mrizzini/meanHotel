@@ -46,7 +46,7 @@ module.exports.login = function(req, res) { // login function we will use as an 
         }  else {
             if (bcrypt.compareSync(password, user.password)) { // compares password we went in with user.password property
                 console.log('User found', user);  // if they are the same
-                var token = jwt.sign({ username: user.username }, 's3cr3t', { expiresIn: 3600 } )   
+                var token = jwt.sign({ username: user.username }, 's3cr3t', { expiresIn: 3600 } );  
                 //token generated if successful login. takes payload, a secret (environment variable defined somewhere on platform), and how long token is valid
                 // res.status(200).json(user); // if we have the user, it returns the user information
                 res.status(200).json({success: true, token: token}); // sends object instead of var 

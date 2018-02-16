@@ -36,16 +36,18 @@ router
     .route('/hotels/:hotelId/reviews/:reviewId') // hotelId is a parameter which will match any thing from /api/hotels/....  the controller can also access this
     .get(ctrlReviews.reviewsGetOne)
     .put(ctrlReviews.reviewsUpdateOne) // route to update a specific hotel review
-    .delete(ctrlReviews.reviewsDeleteOne) // deletes specific hotel review
+    .delete(ctrlReviews.reviewsDeleteOne); // deletes specific hotel review
     
 // Authentication route. also need to bring in controller above
 router
     .route('/users/register')
-    .post(ctrlUsers.register)
+    .post(ctrlUsers.register);
     
     router
     .route('/users/login')
-    .post(ctrlUsers.login);
+     .post(ctrlUsers.login);
+    //    .post(ctrlUsers.login);
+
 
 
 module.exports = router; //exports router to other files
